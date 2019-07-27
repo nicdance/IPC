@@ -9,7 +9,8 @@ struct Entity {
 	float size = 1;
 };
 
-const wchar_t* mem_block = L"MyEntityMemory";
-const wchar_t* count_mem_block = L"MyCountMemory";
+// Name of the Memory block for the entities and  count to be stored.
+static const wchar_t* mem_block = L"MyEntityMemory";
+static const wchar_t* count_mem_block = L"MyCountMemory";
 
 #endif 

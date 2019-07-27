@@ -16,7 +16,7 @@ EntityEditorApp::~EntityEditorApp() {
 bool EntityEditorApp::startup() {
 	
 	m_2dRenderer = new aie::Renderer2D();
-	m_font = new aie::Font("../font/consolas.ttf", 32);
+	m_font = new aie::Font("./font/consolas.ttf", 32);
 	
 	setBackgroundColour(1, 1, 1);
 
@@ -87,15 +87,19 @@ void EntityEditorApp::update(float deltaTime) {
 		if (entity.y < 0)
 			entity.y += getWindowHeight();
 	}
+
+	// Sets up a pointer to memory to share with other app
+	// Adds all entried from the entity list to the data.
 	Entity* data = (Entity*)MapViewOfFile(fileHandle, FILE_MAP_ALL_ACCESS, 0, 0, ENTITY_COUNT * sizeof(Entity));
 	for (int i = 0; i < ENTITY_COUNT; i++)
 	{
 		data[i] = m_entities[i];
 	}
 
-
+	// Sets up a memory pointed for the in counter to be shared with other app and assigns size value
 	int* count = (int*)MapViewOfFile(countFileHandle, FILE_MAP_ALL_ACCESS, 0, 0, sizeof(int));
 	*count = ENTITY_COUNT;
+
 	// unmap the memory block since we're done with it 
 	UnmapViewOfFile(data);
 	UnmapViewOfFile(count);
@@ -111,7 +115,7 @@ void EntityEditorApp::draw() {
 
 	// draw entities
 	for (auto& entity : m_entities) {
-		m_2dRenderer->setRenderColour(entity.r, entity.g, entity.b);
+		m_2dRenderer->setRenderColour(entity.r, entity.g, entity.b, 1.0f);
 		m_2dRenderer->drawBox(entity.x, entity.y, entity.size, entity.size, entity.rotation);
 	}
 	

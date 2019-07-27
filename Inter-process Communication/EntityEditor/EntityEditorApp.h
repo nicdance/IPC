@@ -20,8 +20,8 @@ public:
 	virtual void draw();
 
 protected:
-	HANDLE				fileHandle;
-	HANDLE				countFileHandle;
+	HANDLE				fileHandle;			// Entity HANDLE 
+	HANDLE				countFileHandle;	// count HANDLE
 	aie::Renderer2D*	m_2dRenderer;
 	aie::Font*			m_font;
 
